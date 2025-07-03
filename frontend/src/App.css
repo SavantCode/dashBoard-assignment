@@ -19,3 +19,27 @@
 .bottom-scroll::-webkit-scrollbar { height: 6px; }
 .bottom-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
 .table-container { max-width: 100%; overflow-x: auto; }
+
+
+
+
+
+
+/*
+Hiding vertical scrollbar for main content area
+This is useful when you want to prevent the scrollbar from appearing
+while still allowing scrolling functionality.
+
+look below
+*/
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.main-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge */
+.main-no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}

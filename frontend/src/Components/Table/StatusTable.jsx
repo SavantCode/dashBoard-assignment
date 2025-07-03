@@ -4,34 +4,35 @@ import { useState } from 'react';
 import mockMeetings from './Data/mockData.json';
 import { FaEllipsisV } from 'react-icons/fa';
 import { FiChevronDown as SortIcon } from 'react-icons/fi';
+import {UpDownArrow} from '../../assets/Icons/IconsSvg.jsx'; // Import icons if needed, or remove this line if not used
 import { Menu } from '@headlessui/react';
 
+
 const STATUS_STYLES = {
-  Completed:        'bg-green-200 text-green-800 border border-green-300 hover:bg-green-300',
-  Complete:         'bg-green-200 text-green-800 border border-green-300 hover:bg-green-300',
-  Upcoming:         'bg-yellow-200 text-yellow-800 border border-yellow-300 hover:bg-yellow-300',
-  Overdue:          'bg-red-200 text-red-800 border border-red-300 hover:bg-red-300',
-  'In Progress':    'bg-blue-100 text-blue-700 border border-blue-200 hover:bg-blue-200',
-  Ongoing:          'bg-blue-200 text-blue-900 border border-blue-300 hover:bg-blue-300',
-  Draft:            'bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300',
-  Archived:         'bg-red-100 text-red-600 border border-red-200 hover:bg-red-200',
-  Cancelled:        'bg-gray-300 text-gray-700 border border-gray-400 hover:bg-gray-400',
-  'Re Scheduled':   'bg-purple-200 text-purple-800 border border-purple-300 hover:bg-purple-300',
-  'Follow Up':      'bg-indigo-200 text-indigo-800 border border-indigo-300 hover:bg-indigo-300',
+  Completed: 'bg-green-200 text-green-800 border border-green-300 hover:bg-green-300',
+  Complete: 'bg-green-200 text-green-800 border border-green-300 hover:bg-green-300',
+  Upcoming: 'bg-yellow-200 text-yellow-800 border border-yellow-300 hover:bg-yellow-300',
+  Overdue: 'bg-red-200 text-red-800 border border-red-300 hover:bg-red-300',
+  'In Progress': 'bg-blue-100 text-blue-700 border border-blue-200 hover:bg-blue-200',
+  Ongoing: 'bg-blue-200 text-blue-900 border border-blue-300 hover:bg-blue-300',
+  Draft: 'bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300',
+  Archived: 'bg-red-100 text-red-600 border border-red-200 hover:bg-red-200',
+  Cancelled: 'bg-gray-300 text-gray-700 border border-gray-400 hover:bg-gray-400',
+  'Re Scheduled': 'bg-purple-200 text-purple-800 border border-purple-300 hover:bg-purple-300',
+  'Follow Up': 'bg-indigo-200 text-indigo-800 border border-indigo-300 hover:bg-indigo-300',
 };
 
 const TypeTag = ({ type }) => (
-  <span className={`px-3 py-1 rounded text-xs font-semibold ${
-    type === 'Online' ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'}`}>
+  <span className={`px-3 py-1 rounded text-xs font-semibold ${type === 'Online' ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'}`}>
     {type}
   </span>
 );
 
-const PER_PAGE_OPTIONS = [10, 25, 50];
+const PER_PAGE_OPTIONS = [ 5, 6, 7, 8, 9, 10, 15, 20, 25, 50];
 
 export default function StatusTable() {
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(25);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'asc' });
 
   // Sorting logic
@@ -99,54 +100,55 @@ export default function StatusTable() {
 
   return (
     <div className="flex flex-col h-full px-8 py-6 bg-gray-50 min-h-screen">
+
+      {/* here i wish to put meetingspage component */}
       <div className="bg-white rounded-lg shadow border border-gray-200 flex flex-col flex-grow max-w-[calc(100vw-64px)] mx-auto">
         <div className="overflow-x-auto">
+      
           <table className="min-w-[900px] w-full text-left text-sm border-collapse">
             <thead className="bg-gray-100 select-none text-sm text-gray-800 font-medium shadow-sm">
-  <tr>
-    {/* Checkbox column (no right border) */}
-    <th className="sticky left-0 z-30 bg-gray-100 px-4 py-3 w-14">
-      <input
-        type="checkbox"
-        className="w-5 h-5 cursor-pointer border border-gray-400 rounded"
-      />
-    </th>
+              <tr>
+                {/* Checkbox column (no right border) */}
+                <th className="sticky left-0 z-30 bg-gray-100 px-4 py-3 w-14">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 cursor-pointer border border-gray-400 rounded"
+                  />
+                </th>
 
-    {headers.map(({ key, label, sortable }) => (
-      <th
-        key={key}
-        className="py-3 px-4 whitespace-nowrap bg-gray-100"
-      >
-        <button
-          onClick={() => sortable && requestSort(key)}
-          disabled={!sortable}
-          className={`flex items-center gap-1 w-full text-left font-medium text-gray-700 ${
-            sortable ? 'hover:text-purple-700' : 'cursor-default'
-          }`}
-        >
-          {label}
-          {sortable && (
-            <SortIcon
-              className={`transition-transform duration-200 ${
-                sortConfig.key === key
-                  ? sortConfig.direction === 'asc'
-                    ? 'rotate-180 text-purple-700'
-                    : 'text-purple-700'
-                  : 'text-gray-400'
-              }`}
-              size={16}
-            />
-          )}
-        </button>
-      </th>
-    ))}
+                {headers.map(({ key, label, sortable }) => (
+                  <th
+                    key={key}
+                    className="py-3 px-4 whitespace-nowrap bg-gray-100"
+                  >
+                    <button
+                      onClick={() => sortable && requestSort(key)}
+                      disabled={!sortable}
+                      className={`flex items-center gap-1 w-full text-left font-medium text-gray-700 ${sortable ? 'hover:text-purple-700' : 'cursor-default'
+                        }`}
+                    >
+                      {label}
+                      {sortable && (
+                        <SortIcon
+                          className={`transition-transform duration-200 ${sortConfig.key === key
+                              ? sortConfig.direction === 'asc'
+                                ? 'rotate-180 text-purple-700'
+                                : 'text-purple-700'
+                              : 'text-gray-400'
+                            }`}
+                          size={16}
+                        />
+                      )}
+                    </button>
+                  </th>
+                ))}
 
-    {/* Sticky Action column with left border + shadow */}
-    <th className="sticky right-0 z-30 bg-gray-100 px-4 py-3 w-16 border-l border-gray-300 shadow-outline">
-      Action
-    </th>
-  </tr>
-</thead>
+                {/* Sticky Action column with left border + shadow */}
+                <th className="sticky right-0 z-30 bg-gray-100 px-4 py-3 w-16 border-l border-gray-300 shadow-outline">
+                  Action
+                </th>
+              </tr>
+            </thead>
 
 
 
@@ -208,9 +210,8 @@ export default function StatusTable() {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              className={`w-full text-left px-3 py-2 ${
-                                active ? 'bg-gray-100' : ''
-                              }`}
+                              className={`w-full text-left px-3 py-2 ${active ? 'bg-gray-100' : ''
+                                }`}
                             >
                               View Participants
                             </button>
@@ -219,9 +220,8 @@ export default function StatusTable() {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              className={`w-full text-left px-3 py-2 ${
-                                active ? 'bg-gray-100' : ''
-                              }`}
+                              className={`w-full text-left px-3 py-2 ${active ? 'bg-gray-100' : ''
+                                }`}
                             >
                               Edit
                             </button>
@@ -230,9 +230,8 @@ export default function StatusTable() {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              className={`w-full text-left px-3 py-2 ${
-                                active ? 'bg-gray-100' : ''
-                              }`}
+                              className={`w-full text-left px-3 py-2 ${active ? 'bg-gray-100' : ''
+                                }`}
                             >
                               Delete
                             </button>
@@ -298,11 +297,10 @@ export default function StatusTable() {
                 <button
                   key={idx}
                   onClick={() => setPage(pageNum)}
-                  className={`px-3 py-1 rounded border ${
-                    page === pageNum
+                  className={`px-3 py-1 rounded border ${page === pageNum
                       ? 'bg-purple-600 text-white border-purple-600'
                       : 'border-gray-300 bg-white hover:bg-purple-100'
-                  }`}
+                    }`}
                 >
                   {pageNum}
                 </button>

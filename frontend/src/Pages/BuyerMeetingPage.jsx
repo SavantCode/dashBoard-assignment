@@ -16,7 +16,7 @@ export default function BuyerMeetingPage() {
     { label: 'Archive', count: 75 },
   ];
   return (
-    <div className="pl-[20px] pr-6 pt-[24px] pb-6 bg-[#F9F9F9] min-h-screen font-poppins relative">
+    <div className="pl-[20px] pr-6 pt-[24px] pb-6 bg-[#F9F9F9] min-h-screen font-poppins relative *: ">
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-3 gap-3">
         <h1 className="text-[18px] font-semibold text-black leading-[27px]">
